@@ -11,6 +11,9 @@ body{
 
 .signin{
   display: block;
-  width:80px;
-  margin-left: 40%;
+  width:100px;
+  margin-left: 46%;
+}
+footer{
+  background: blue;
 }
