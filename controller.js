@@ -9,7 +9,11 @@ app.get('/', function(req, res){
   res.sendFile('./index.html');
 });
 
-app.post('/signup', urlencodedParser, function(req, res){
+app.post('/login', urlencodedParser, function(req, res){
   console.log(req.body);
+});
+
+app.post('/signup', urlencodedParser, function(req, res){
+ console.log(req.body);
 });
 }

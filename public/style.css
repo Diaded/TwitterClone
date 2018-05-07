@@ -1,7 +1,12 @@
 body{
-  background: whitesmoke;
+  background: white;
   text-align: center;
   color: darkblue;
+}
+.signUpPage{
+  background: whitesmoke;
+
+
 }
 .main-logo{
   width:8%;
@@ -16,4 +21,13 @@ body{
 }
 footer{
   background: blue;
+}
+
+.signup{
+  width: 95%;
+  margin-left: 2.5%;
+}
+.signup form{
+  width: 90%;
+  margin-left: 5%;
 }
