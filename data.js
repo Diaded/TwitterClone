@@ -6,6 +6,6 @@ var twitSchema=  mongoose.Schema({
   username: String,
   email: String,
   password: String,
-  tweets: Object
+  tweets: Array
 });
 exports.twitter= mongoose.model('twitter', twitSchema);

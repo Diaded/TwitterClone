@@ -17,8 +17,9 @@ app.post('/login', urlencodedParser, function(req, res){
 });
 
 app.post('/signup', urlencodedParser, function(req, res){
- twitter({username: req.body.username, email: req.body.email, password: req.body.password[0], tweets:{arr:['cc']}}).save();
-});
-
+ twitter({username: req.body.username, email: req.body.email, password: req.body.password[0], tweets:{arr:['cc']}}).save(function(){
+   res.render('index.ejs');
+  });
+ });
 
 }
