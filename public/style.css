@@ -1,4 +1,16 @@
 body{
   background: whitesmoke;
   text-align: center;
+  color: darkblue;
+}
+.main-logo{
+  width:8%;
+  height: 8%;
+  margin-top: 2%;
+}
+
+.signin{
+  display: block;
+  width:80px;
+  margin-left: 40%;
 }
