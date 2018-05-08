@@ -62,5 +62,15 @@ app.post('/logout', urlencodedParser, function(req, res){
   res.sendFile(__dirname+"/public/index.html");
 });
 
+app.post('/alltweets', urlencodedParser, function(req, res){
+  twitter.find({}, function(err, data){
+    res.render('index.ejs', {data: data});
+  });
+});
+
+app.post('/search', urlencodedParser, function(req, res){
+    res.sendFile(__dirname+'/public/search.html');
+});
+
 
 }
