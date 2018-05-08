@@ -1,4 +1,4 @@
-var user;
+var user="";
 
 exports.setter= function(data){
   user=data;

@@ -36,14 +36,15 @@
       <input type="submit" value="Tweet!" class="btn btn-outline-primary mt-1">
     </div>
   </form>
-  <%for(var i=0; i<data.length; i++){%>
+  <h4>All My Tweets</h4>
+  <%for(var i=0; i<data[0].tweets.length; i++){%>
     <div class="card mt-3">
       <div class="card-header">
-      <b class="mr-5">--<%=  data[i].username %></b>
+      <b class="mr-5">--<%=  data[0].username %></b>
     </div>
     <div class="card-body">
       <blockquote>
-      <p><%= data[i].tweets[data[i].tweets.length-1].str %>.</p>
+      <p><%= data[0].tweets[i].str %>.</p>
       <footer class="bg-white"><form class='rL'><input type="submit" value="RT" class="btn btn-lg-danger"></form>
               <form class='rL'><input type="submit" value="Like" class="btn btn-lg-danger"></form>
       </footer>

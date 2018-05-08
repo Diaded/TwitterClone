@@ -39,3 +39,6 @@ footer{
 .mainn li a{
   color:whitesmoke;
 }
+.rL{
+  display: inline-block;
+}
