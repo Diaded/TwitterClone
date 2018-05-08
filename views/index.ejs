@@ -37,6 +37,7 @@
     </div>
   </form>
   <%for(var i=0; i<data.length; i++){%>
+    <%if(data[i].tweets.length>0){%>
     <div class="card mt-3">
       <div class="card-header">
       <b class="mr-5">--<%=  data[i].username %></b>
@@ -50,6 +51,7 @@
       </blockquote>
     </div>
  </div>
+  <%}%>
   <%}%>
  </div>
 </body>

@@ -28,15 +28,22 @@
       </li>
     </ul>
   </header>
-</body>
-<div class='bg-dark'>
-  <form action= "searchfor" method="post">
-    <div class="form-group text-white bg-dark">
-      <label for="username">Search:</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Type in name for user">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <h4></h4>
+  <%for(var i=0; i<data[0].tweets.length; i++){%>
+    <div class="card mt-3">
+      <div class="card-header">
+      <b class="mr-5">--<%=  data[0].username %></b>
     </div>
-    <button type="submit" class="btn btn-outline-primary">Search</button>
- </form>
-</div>
+    <div class="card-body">
+      <blockquote>
+      <p><%= data[0].tweets[i].str %>.</p>
+      <footer class="bg-white"><form class='rL'><input type="submit" value="RT" class="btn btn-lg-danger"></form>
+              <form class='rL'><input type="submit" value="Like" class="btn btn-lg-danger"></form>
+      </footer>
+      </blockquote>
+    </div>
+ </div>
+  <%}%>
+ </div>
+</body>
 </html>

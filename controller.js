@@ -72,5 +72,10 @@ app.post('/search', urlencodedParser, function(req, res){
     res.sendFile(__dirname+'/public/search.html');
 });
 
+app.post('/searchfor', urlencodedParser, function(req, res){
+  twitter.find({username: req.body.username}, function(err, data){
+    res.render('user.ejs', {data: data});
+  });
+});
 
 }
