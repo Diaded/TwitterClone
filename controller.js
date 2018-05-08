@@ -13,18 +13,18 @@ app.get('/', function(req, res){
 });
 
 app.post('/login', urlencodedParser, function(req, res){
-  
-  console.log(req.body);
-  res.render('index.ejs');
+  twitter.find({email: req.body.email}, function(){
+    res.render('index.ejs');
+  });
 });
 
 app.post('/signup', urlencodedParser, function(req, res){
-  if(req.body.password===req.body.passwordCon){
+if(req.body.password===req.body.passwordCon){
  twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
-  res.sendFile('index.html');
+ res.sendFile(__dirname+'/public/index.html');
 }else{
   res.send("Password dont match");
 }
- });
+});
 
 }
