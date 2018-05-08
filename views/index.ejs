@@ -45,8 +45,8 @@
     <div class="card-body">
       <blockquote>
       <p><%= data[i].tweets[data[i].tweets.length-1].str %>.</p>
-      <footer class="bg-white"><form class='rL'><input type="submit" value="RT" class="btn btn-lg-danger"></form>
-              <form class='rL'><input type="submit" value="Like" class="btn btn-lg-danger"></form>
+      <footer class="bg-white"><form class='rL'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].rt %></form>
+              <form class='rL'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].likes %></form>
       </footer>
       </blockquote>
     </div>
