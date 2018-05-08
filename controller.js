@@ -21,9 +21,13 @@ app.post('/login', urlencodedParser, function(req, res){
 });
 
 app.post('/tweet', urlencodedParser, function(req, res){
-  console.log(req.body);
-  console.log(getter.getter());
-  //res.json(req.body);
+  twitter.find({username: getter.getter()}, function(err, data){
+    data[0].tweets.push({str:req.body.tweet, likes: 0, rt: 0});
+    console.log(data[0]);
+    twitter.update({username: data[0].username}, data[0], {upsert: true}, function(){
+      res.render('index.ejs');
+    });
+  });
 });
 
 app.post('/signup', urlencodedParser, function(req, res){
