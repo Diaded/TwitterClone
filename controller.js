@@ -13,6 +13,7 @@ app.get('/', function(req, res){
 });
 
 app.post('/login', urlencodedParser, function(req, res){
+  
   console.log(req.body);
   res.render('index.ejs');
 });
@@ -20,7 +21,7 @@ app.post('/login', urlencodedParser, function(req, res){
 app.post('/signup', urlencodedParser, function(req, res){
   if(req.body.password===req.body.passwordCon){
  twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
- res.render('index.ejs');
+  res.sendFile('index.html');
 }else{
   res.send("Password dont match");
 }
