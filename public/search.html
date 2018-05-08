@@ -1,0 +1,42 @@
+<!Doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./style.css">
+  <title>Twitter Clone</title>
+</head>
+<body class="bg-primary">
+  <header>
+    <ul class="nav justify-content-center bg-primary">
+      <li class="nav-item">
+        <img src="https://image.freepik.com/free-icon/twitter-logo_318-40209.jpg" class="sec-log">
+      </li>
+      <li class="nav-item">
+        <form action="mytweets" method="post"><input class="btn-outline-primary text-white" value="My Tweets" type="submit"></form>
+      </li>
+      <li class="nav-item">
+        <form action="alltweets" method="post"><input class="btn-outline-primary text-white" value="All Tweets" type="submit"></form>
+      </li>
+      <li class="nav-item ">
+        <form action="search" method="post"><input class="btn-outline-secondary text-white" value="Search" type="submit"></form>
+      </li>
+      <li class="nav item">
+        <form action="logout" method="post"><input class="btn-outline-secondary text-white" value="Log Out" type="submit"></form>
+      </li>
+    </ul>
+  </header>
+</body>
+<div class='bg-dark'>
+  <form>
+    <div class="form-group text-white bg-dark">
+      <label for="username">Search:</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Type in name for user">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Search</button>
+ </form>
+</div>
+</html>
