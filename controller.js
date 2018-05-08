@@ -18,9 +18,12 @@ app.post('/login', urlencodedParser, function(req, res){
 });
 
 app.post('/signup', urlencodedParser, function(req, res){
- twitter({username: req.body.username, email: req.body.email, password: req.body.password[0], tweets:[]}).save(function(){
-   res.sendFile('index.html');
-  });
+  if(req.body.password===req.body.passwordCon){
+ twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
+ res.render('index.ejs');
+}else{
+  res.send("Password dont match");
+}
  });
 
 }
