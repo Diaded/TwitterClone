@@ -6,6 +6,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./style.css">
+  <script type="text/javascript" src="./jq.js"></script>
   <title>Twitter Clone</title>
 </head>
 <body class="bg-primary">
@@ -39,14 +40,14 @@
   <%for(var i=0; i<data.length; i++){%>
     <%if(data[i].tweets.length>0){%>
     <div class="card mt-3">
-      <div class="card-header">
-      <b class="mr-5">--<%=  data[i].username %></b>
-    </div>
+      <div class="card-header carder">
+        <b class="mr-5 username">--<%=  data[i].username %></b>
+      </div>
     <div class="card-body">
       <blockquote>
       <p><%= data[i].tweets[data[i].tweets.length-1].str %>.</p>
-      <footer class="bg-white"><form class='rL'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].rt %></form>
-              <form class='rL'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].likes %></form>
+      <footer class="bg-white"><form class='rL retweet'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].rt %></form>
+              <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].likes %></form>
       </footer>
       </blockquote>
     </div>
