@@ -33,11 +33,11 @@
   <%for(var i=0; i<data[0].tweets.length; i++){%>
     <div class="card mt-3">
       <div class="card-header">
-        <b class="mr-5 username">--<%=  data[0].username %></b>
+        <b class="mr-5 username"><%=data[0].username%></b>
       </div>
     <div class="card-body">
       <blockquote>
-      <p><%= data[0].tweets[i].str %>.</p>
+      <p class="str"><%= data[0].tweets[i].str %></p>
       <footer class="bg-white"><form class='rL retweet'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].rt %></form>
               <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].likes %></form>
       </footer>

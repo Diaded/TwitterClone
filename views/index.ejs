@@ -41,15 +41,16 @@
     <%if(data[i].tweets.length>0){%>
     <div class="card mt-3">
       <div class="card-header carder">
-        <b class="mr-5 username">--<%=  data[i].username %></b>
+        <b class="mr-5 username"><%=data[i].username%></b>
       </div>
     <div class="card-body">
-      <blockquote>
-      <p><%= data[i].tweets[data[i].tweets.length-1].str %>.</p>
-      <footer class="bg-white"><form class='rL retweet'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].rt %></form>
-              <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].likes %></form>
-      </footer>
-      </blockquote>
+       <blockquote>
+        <p class='str'><%= data[i].tweets[data[i].tweets.length-1].str %></p>
+          <footer class="bg-white">
+            <form class="retweet rL"><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].rt %></form>
+            <form class="like rL"><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[i].tweets[data[i].tweets.length-1].likes %></form>
+         </footer>
+       </blockquote>
     </div>
  </div>
   <%}%>

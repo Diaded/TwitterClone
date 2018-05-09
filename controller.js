@@ -78,4 +78,22 @@ app.post('/searchfor', urlencodedParser, function(req, res){
   });
 });
 
+app.post('/retweet', urlencodedParser, function(req, res){
+  console.log(req.body);
+  res.json(req.body);
+});
+
+app.post('/like', urlencodedParser, function(req, res){
+  //console.log(req.body);
+  twitter.find({username: req.body.username}, function(err, data){
+    for(var i=0; i<data[0].tweets.length; i++){
+    if(data[0].tweets[i].str===req.body.str){
+      data[0].tweets[i].likes++;
+      }
+    }
+    console.log(data[0]);
+    twitter.update({username:req.body.username}, data[0], {upsert:true}, function(){console.log('working')});
+  });
+  res.json(req.body);
+});
 }
