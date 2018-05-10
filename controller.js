@@ -3,6 +3,7 @@ var getter= require('./getter');
 var bodyParser= require('body-parser');
 
 
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var twitter= data.twitter;
@@ -21,11 +22,22 @@ app.get('/', function(req, res){
 
 app.post('/login', urlencodedParser, function(req, res){
   twitter.find({email: req.body.email}, function(err, data){
-     getter.setter(data[0].username);
-     console.log(getter.getter());
-     twitter.find({}, function(err, data){
-       res.render('index.ejs', {data: data});
-     });
+    if(data=[]){
+      res.send('Wrong Password!');
+    }else{
+      if(req.body.password===data[0].password){
+        getter.setter(data[0].username);
+        console.log(getter.getter());
+        twitter.find({}, function(err, data){
+          res.render('index.ejs', {data: data});
+        });
+      }else{
+        res.send('Wrong Password!');
+      }
+
+    }
+
+
   });
 });
 
@@ -42,12 +54,25 @@ app.post('/tweet', urlencodedParser, function(req, res){
 });
 
 app.post('/signup', urlencodedParser, function(req, res){
-if(req.body.password===req.body.passwordCon){
- twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
- res.sendFile(__dirname+'/public/index.html');
-}else{
-  res.send("Password dont match");
-}
+  twitter.find({email: req.body.email}, function(err, data){
+    if(data.length>0){
+      res.send('email is taken');
+    }else{
+        twitter.find({username: req.body.username}, function(err, data){
+          if(data.length>0){
+            res.send('username is taken');
+          }else{
+            if(req.body.password===req.body.passwordCon){
+             twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
+             res.sendFile(__dirname+'/public/index.html');
+            }else{
+              res.send("Passwords dont match");
+            }
+          }
+        });
+    }
+
+  });
 });
 
 app.post('/mytweets', urlencodedParser, function(req, res){
