@@ -11,33 +11,30 @@ var twitter= data.twitter;
 module.exports= function(app){
 
 app.get('/', function(req, res){
-  if(getter.getter()==="null"){
-    res.sendFile('./index.html');
-  }else{
-    twitter.find({}, function(err, data){
-      res.render('index.ejs', {data: data});
-});
-}
+  res.sendFile(__dirname+'/public/index.html');
 });
 
 app.post('/login', urlencodedParser, function(req, res){
+  console.log(req.body);
+
   twitter.find({email: req.body.email}, function(err, data){
-    if(data=[]){
-      res.send('Wrong Password!');
+    console.log(data);
+    if(data.length===0){
+      res.sendFile(__dirname+'/public/errlogin.html');
+      console.log('wrong username');
     }else{
       if(req.body.password===data[0].password){
         getter.setter(data[0].username);
-        console.log(getter.getter());
         twitter.find({}, function(err, data){
           res.render('index.ejs', {data: data});
+          console.log(getter.getter());
         });
+
       }else{
-        res.send('Wrong Password!');
+        res.sendFile(__dirname+'/public/errlogin.html');
       }
 
     }
-
-
   });
 });
 
@@ -56,17 +53,17 @@ app.post('/tweet', urlencodedParser, function(req, res){
 app.post('/signup', urlencodedParser, function(req, res){
   twitter.find({email: req.body.email}, function(err, data){
     if(data.length>0){
-      res.send('email is taken');
+      res.sendFile(__dirname+'/public/errSignUp.html');
     }else{
         twitter.find({username: req.body.username}, function(err, data){
           if(data.length>0){
-            res.send('username is taken');
+            res.sendFile(__dirname+'/public/errSignUp.html');
           }else{
             if(req.body.password===req.body.passwordCon){
              twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
              res.sendFile(__dirname+'/public/index.html');
             }else{
-              res.send("Passwords dont match");
+              res.sendFile(__dirname+'/public/errSignUp.html');
             }
           }
         });

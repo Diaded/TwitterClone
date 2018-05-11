@@ -8,6 +8,6 @@ app.use(express.static('./public'));
 
 controller(app);
 
-app.listen(4000, function(){
+app.listen(3000, function(){
   console.log('working');
 });

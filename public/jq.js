@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+
+
  $(".retweet").submit(function(){
     var username=  $(this).parent().parent().parent().parent().find('.username').html();
     data={username: username};
@@ -26,7 +29,11 @@ $(document).ready(function(){
 
       }
     });
+
   });
+
+
+
 
 
 });
