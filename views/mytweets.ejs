@@ -30,10 +30,10 @@
     </ul>
   </header>
   <div class="container bg-white">
-    <form class="tweeter" action="tweet" method="post">
+    <form class="tweeter">
     <div class="form-group">
       <label for="exampleFormControlTextarea1"><strong>What's on your mind?</strong></label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="tweet" placeholder="write your tweet here"></textarea>
+      <textarea class="form-control tweetStr" id="exampleFormControlTextarea1" rows="2" name="tweet" placeholder="write your tweet here"></textarea>
       <input type="submit" value="Tweet!" class="btn btn-outline-primary mt-1">
     </div>
   </form>
@@ -46,8 +46,11 @@
     <div class="card-body">
       <blockquote>
       <p class="str"><%= data[0].tweets[i].str %></p>
-      <footer class="bg-white"><form class='rL retweet'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].rt %></form>
-              <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].likes %></form>
+      <footer class="bg-white">
+        <form class='rL tweetOut'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].rt %></form>
+        <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].likes %></form>
+        <textarea class="form-control reTWEET reTWEET2"></textarea>
+        <button class="btn btn-lg-danger ml-2 reTWEET reTWEET1">Submit</button>
       </footer>
       </blockquote>
     </div>

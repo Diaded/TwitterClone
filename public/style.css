@@ -52,7 +52,27 @@ footer{
 }
 
 .loginerr1{
-  width: 50%;
-  margin-left:25%;
+  width: 40%;
+  margin-left:29%;
   margin-top: 10%;
+  border: 2px solid black;
+  padding: 0 5% 5% 5%;
+}
+
+.main-form{
+  width: 80%;
+  margin-left: 10%;
+  padding: 0 5% 5% 5%;
+}
+.main-page{
+  background: whitesmoke;
+}
+
+.errLoginPage{
+  background: whitesmoke;
+}
+
+.reTWEET{
+  display: none;
+  margin-top: 1%;
 }

@@ -38,8 +38,11 @@
     <div class="card-body">
       <blockquote>
       <p class="str"><%= data[0].tweets[i].str %></p>
-      <footer class="bg-white"><form class='rL retweet'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].rt %></form>
-              <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].likes %></form>
+      <footer class="bg-white">
+        <form class='rL tweetOut'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].rt %></form>
+        <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].likes %></form>
+        <textarea class="form-control reTWEET reTWEET2"></textarea>
+        <button class="btn btn-lg-danger ml-2 reTWEET reTWEET1">Submit</button>
       </footer>
       </blockquote>
     </div>
