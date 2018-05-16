@@ -38,23 +38,27 @@
     </div>
   </form>
   <h4>All My Tweets</h4>
-  <%for(var i=0; i<data[0].tweets.length; i++){%>
+  <%for(var i=0; i<data[1].tweets.length; i++){%>
     <div class="card mt-3">
       <div class="card-header">
-      <b class="mr-5 username"><%=data[0].username%></b>
+      <b class="mr-5 username"><%=data[1].username%></b>
     </div>
-    <% if(data[0].tweets[i].hasOwnProperty('rtUsername')){ %>
+    <% if(data[1].tweets[i].hasOwnProperty('rtUsername')){ %>
     <div class="card-body">
-      <p>Tweet from <%= data[0].tweets[i].rtUsername %></p>
-      <p>" <%= data[0].tweets[i].tweetString %> "</p>
+      <p>Tweet from <%= data[1].tweets[i].rtUsername %></p>
+      <p>" <%= data[1].tweets[i].tweetString %> "</p>
     </div>
     <%}%>
     <div class="card-body">
       <blockquote>
-      <p class="str"><%= data[0].tweets[i].str %></p>
+      <p class="str"><%= data[1].tweets[i].str %></p>
       <footer class="bg-white">
-        <form class='rL tweetOut'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].rt %></form>
-        <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[0].tweets[i].likes %></form>
+        <form class='rL tweetOut'><input type="submit" value="RT" class="btn btn-lg-danger ml-2"><%= data[1].tweets[i].rt %></form>
+        <%if(data[1].tweets[i].likes.includes(data[0])){%>
+        <form class='rL Unlike'><input type="submit" value="Unlike" class="btn btn-lg-danger ml-2 bg-primary"><%= data[1].tweets[i].likes.length %></form>
+        <%}else{%>
+          <form class='rL like'><input type="submit" value="Like" class="btn btn-lg-danger ml-2"><%= data[1].tweets[i].likes.length %></form>
+        <%}%>
         <textarea class="form-control reTWEET reTWEET2"></textarea>
         <button class="btn btn-lg-danger ml-2 reTWEET reTWEET1">Submit</button>
       </footer>

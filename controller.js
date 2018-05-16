@@ -26,6 +26,7 @@ app.post('/login', urlencodedParser, function(req, res){
       if(req.body.password===data[0].password){
         getter.setter(data[0].username);
         twitter.find({}, function(err, data){
+          data.unshift(getter.getter());
           res.render('index.ejs', {data: data});
           console.log(getter.getter());
         });
@@ -41,7 +42,7 @@ app.post('/login', urlencodedParser, function(req, res){
 app.post('/tweet', urlencodedParser, function(req, res){
   console.log(req.body);
   twitter.find({username: getter.getter()}, function(err, data){
-    data[0].tweets.push({str:req.body.tweet, likes: 0, rt: 0});
+    data[0].tweets.push({str:req.body.tweet, likes: [], rt: 0});
     console.log(data[0]);
     twitter.update({username: data[0].username}, data[0], {upsert: true}, function(){
       console.log('working');
@@ -74,6 +75,7 @@ app.post('/signup', urlencodedParser, function(req, res){
 
 app.post('/mytweets', urlencodedParser, function(req, res){
   twitter.find({username: getter.getter()}, function(err, data){
+    data.unshift(getter.getter());
     res.render('mytweets.ejs', {data:data});
   });
 });
@@ -86,6 +88,7 @@ app.post('/logout', urlencodedParser, function(req, res){
 
 app.post('/alltweets', urlencodedParser, function(req, res){
   twitter.find({}, function(err, data){
+    data.unshift(getter.getter());
     res.render('index.ejs', {data: data});
   });
 });
@@ -96,6 +99,7 @@ app.post('/search', urlencodedParser, function(req, res){
 
 app.post('/searchfor', urlencodedParser, function(req, res){
   twitter.find({username: req.body.username}, function(err, data){
+    data.unshift(getter.getter());
     res.render('user.ejs', {data: data});
   });
 });
@@ -104,9 +108,10 @@ app.post('/searchfor', urlencodedParser, function(req, res){
 app.post('/like', urlencodedParser, function(req, res){
   console.log(req.body);
   twitter.find({username: req.body.username}, function(err, data){
+
     for(var i=0; i<data[0].tweets.length; i++){
     if(data[0].tweets[i].str===req.body.str){
-      data[0].tweets[i].likes++;
+      data[0].tweets[i].likes.push(getter.getter());
       }
     }
   //  console.log(data[0]);
@@ -127,7 +132,7 @@ app.post('/retweet', urlencodedParser, function(req, res){
   });
 
   twitter.find({username: getter.getter()}, function(err, data){
-    data[0].tweets.push({tweetString:req.body.str, likes: 0, rt: 0, str:req.body.tweetString, rtUsername:req.body.username});
+    data[0].tweets.push({tweetString:req.body.str, likes: [], rt: 0, str:req.body.tweetString, rtUsername:req.body.username});
     twitter.update({username:data[0].username}, data[0], {upsert:true}, function(){console.log('working retweet')});
   });
 
