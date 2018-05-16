@@ -43,6 +43,12 @@
       <div class="card-header">
       <b class="mr-5 username"><%=data[0].username%></b>
     </div>
+    <% if(data[0].tweets[i].hasOwnProperty('rtUsername')){ %>
+    <div class="card-body">
+      <p>Tweet from <%= data[0].tweets[i].rtUsername %></p>
+      <p>" <%= data[0].tweets[i].tweetString %> "</p>
+    </div>
+    <%}%>
     <div class="card-body">
       <blockquote>
       <p class="str"><%= data[0].tweets[i].str %></p>

@@ -123,11 +123,12 @@ app.post('/retweet', urlencodedParser, function(req, res){
         data[0].tweets[i].rt++;
       }
     }
-    twitter.update({username: req.body.username}, data[0], {upsert:true}, function(){console.log('working')});
+    twitter.update({username: req.body.username}, data[0], {upsert:true}, function(){console.log('working adding retweet')});
   });
 
   twitter.find({username: getter.getter()}, function(err, data){
-
+    data[0].tweets.push({tweetString:req.body.str, likes: 0, rt: 0, str:req.body.tweetString, rtUsername:req.body.username});
+    twitter.update({username:data[0].username}, data[0], {upsert:true}, function(){console.log('working retweet')});
   });
 
 
