@@ -11,7 +11,17 @@ var twitter= data.twitter;
 module.exports= function(app){
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname+'/public/index.html');
+  if(!req.session.username){
+  res.render('index1.ejs');
+}else{
+
+  twitter.find({}, function(err, data){
+    data.unshift(req.session.username);
+    res.render('index.ejs', {data: data});
+    console.log(req.session.username);
+  });
+
+}
 });
 
 app.post('/login', urlencodedParser, function(req, res){
@@ -24,11 +34,12 @@ app.post('/login', urlencodedParser, function(req, res){
       console.log('wrong username');
     }else{
       if(req.body.password===data[0].password){
-        getter.setter(data[0].username);
+        req.session.username=data[0].username;
         twitter.find({}, function(err, data){
-          data.unshift(getter.getter());
+          data.unshift(req.session.username);
           res.render('index.ejs', {data: data});
-          console.log(getter.getter());
+          console.log(req.session);
+          console.log(req.session.username);
         });
 
       }else{
@@ -41,7 +52,7 @@ app.post('/login', urlencodedParser, function(req, res){
 
 app.post('/tweet', urlencodedParser, function(req, res){
   console.log(req.body);
-  twitter.find({username: getter.getter()}, function(err, data){
+  twitter.find({username: res.session.username}, function(err, data){
     data[0].tweets.push({str:req.body.tweet, likes: [], rt: 0});
     console.log(data[0]);
     twitter.update({username: data[0].username}, data[0], {upsert: true}, function(){
@@ -74,21 +85,23 @@ app.post('/signup', urlencodedParser, function(req, res){
 });
 
 app.post('/mytweets', urlencodedParser, function(req, res){
-  twitter.find({username: getter.getter()}, function(err, data){
-    data.unshift(getter.getter());
+  twitter.find({username: req.session.username}, function(err, data){
+    data.unshift(req.session.username);
     res.render('mytweets.ejs', {data:data});
   });
 });
 
 app.post('/logout', urlencodedParser, function(req, res){
-  getter.setter("null");
-  console.log(getter.getter());
-  res.sendFile(__dirname+"/public/index.html");
+    req.session.destroy(function(err){
+      console.log('logged out');
+    });
+    console.log(req.session);
+    res.render('index1.ejs');
 });
 
 app.post('/alltweets', urlencodedParser, function(req, res){
   twitter.find({}, function(err, data){
-    data.unshift(getter.getter());
+    data.unshift(req.session.username);
     res.render('index.ejs', {data: data});
   });
 });
@@ -99,7 +112,7 @@ app.post('/search', urlencodedParser, function(req, res){
 
 app.post('/searchfor', urlencodedParser, function(req, res){
   twitter.find({username: req.body.username}, function(err, data){
-    data.unshift(getter.getter());
+    data.unshift(req.session.username);
     res.render('user.ejs', {data: data});
   });
 });
@@ -111,7 +124,7 @@ app.post('/like', urlencodedParser, function(req, res){
 
     for(var i=0; i<data[0].tweets.length; i++){
     if(data[0].tweets[i].str===req.body.str){
-      data[0].tweets[i].likes.push(getter.getter());
+      data[0].tweets[i].likes.push(req.session.username);
       }
     }
   //  console.log(data[0]);
@@ -131,7 +144,7 @@ app.post('/retweet', urlencodedParser, function(req, res){
     twitter.update({username: req.body.username}, data[0], {upsert:true}, function(){console.log('working adding retweet')});
   });
 
-  twitter.find({username: getter.getter()}, function(err, data){
+  twitter.find({username: req.session.username}, function(err, data){
     data[0].tweets.push({tweetString:req.body.str, likes: [], rt: 0, str:req.body.tweetString, rtUsername:req.body.username});
     twitter.update({username:data[0].username}, data[0], {upsert:true}, function(){console.log('working retweet')});
   });
@@ -144,7 +157,7 @@ app.post('/unlike', urlencodedParser, function(req, res){
   twitter.find({username: req.body.username}, function(err, data){
     for(var i =0; i<data[0].tweets.length; i++){
       if(data[0].tweets[i].str===req.body.str){
-        data[0].tweets[i].likes= data[0].tweets[i].likes.filter(dat=> dat!==getter.getter());
+        data[0].tweets[i].likes= data[0].tweets[i].likes.filter(dat=> dat!==req.session.username);
       }
 
     }
