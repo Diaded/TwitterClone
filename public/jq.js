@@ -12,7 +12,7 @@ $(".like").submit(function(){
       success: function(data){
         setTimeout(function(){
         location.reload();
-      }, 500);
+      }, 700);
       }
     });
     return false;
@@ -38,7 +38,7 @@ $('.tweeter').submit(function(){
     success: function(data){
       setTimeout(function(){
       location.reload();
-    }, 500);
+    }, 700);
     }
   });
   return false;
@@ -57,9 +57,28 @@ $('.reTWEET1').click(function(){
     success: function(data){
     setTimeout(function(){
       window.location.reload();
-    }, 500);
+    }, 700);
     }
 });
+return false;
+});
+
+$('.Unlike').submit(function(){
+  username= $(this).parent().parent().parent().parent().find('.username').html();
+  str=$(this).parent().parent().parent().parent().find('.str').html();
+  data= {username: username, str: str};
+
+  $.ajax({
+    type:'POST',
+    url:'/unlike',
+    data:data,
+    success: function(data){
+      setTimeout(function(){
+        window.location.reload();
+      }, 700);
+    }
+
+  });
 return false;
 });
 

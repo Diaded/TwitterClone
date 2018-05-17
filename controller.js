@@ -140,4 +140,17 @@ app.post('/retweet', urlencodedParser, function(req, res){
   res.json(req.body);
 });
 
+app.post('/unlike', urlencodedParser, function(req, res){
+  twitter.find({username: req.body.username}, function(err, data){
+    for(var i =0; i<data[0].tweets.length; i++){
+      if(data[0].tweets[i].str===req.body.str){
+        data[0].tweets[i].likes= data[0].tweets[i].likes.filter(dat=> dat!==getter.getter());
+      }
+
+    }
+    twitter.update({username: req.body.username}, data[0], {upsert:true}, function(){console.log('working')});
+  });
+  res.json(req.body);
+});
+
 }

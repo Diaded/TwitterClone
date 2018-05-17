@@ -7,3 +7,7 @@ exports.setter= function(data){
 exports.getter= function(){
   return user;
 }
+
+exports.dat= function(arr, dat){
+
+}
