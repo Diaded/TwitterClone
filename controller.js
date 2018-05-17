@@ -52,7 +52,8 @@ app.post('/login', urlencodedParser, function(req, res){
 
 app.post('/tweet', urlencodedParser, function(req, res){
   console.log(req.body);
-  twitter.find({username: res.session.username}, function(err, data){
+  console.log(req.session.username);
+  twitter.find({username: req.session.username}, function(err, data){
     data[0].tweets.push({str:req.body.tweet, likes: [], rt: 0});
     console.log(data[0]);
     twitter.update({username: data[0].username}, data[0], {upsert: true}, function(){
@@ -73,7 +74,7 @@ app.post('/signup', urlencodedParser, function(req, res){
           }else{
             if(req.body.password===req.body.passwordCon){
              twitter({username: req.body.username, email: req.body.email, password: req.body.password, tweets:[]}).save();
-             res.sendFile(__dirname+ '/public/index.html');
+             res.render('index1.ejs');
             }else{
               res.render('errSignUp.ejs', {data: 'password doesnt match'});
             }
